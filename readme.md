@@ -14,6 +14,9 @@ The user is able to see his favourite city weather forecasts for the next five d
 - The city name and a counter have to be saved automatically in the Datastore.
 - Build an API GET that shows the 3 most popular cities requested by users, in JSON format.
 
+## Before starting
+Add a lib folder to the project, in which you have to install the libraries listed in "requirements.txt" file.
+
 ## Built With
 
 * [Google App Engine](https://cloud.google.com/appengine/doc) - Platform used
