@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/style.css">
+        {% block head %}
+          <title> {% block title %}{% endblock %}-MyWebpage </title>
+        {% endblock %}
+    </head>
+
+    <body>
+        <link rel="stylesheet" href="/static/style.css">
+        <div id="content">{% block content %}{% endblock %}</div>
+    </body>
+</html>
+
+

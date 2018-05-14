@@ -1,0 +1,36 @@
+{% extends "default.html" %}
+
+{% block title %} {{resp['title']}} forecasts{% endblock %}
+
+{% block content %}
+
+<h1>{{resp['title']}} </h1>
+
+<h2>5 days forecasts</h2>
+<ul>
+    {% for each in resp['consolidated_weather'][1:] %}
+
+<li>{% if each['min_temp'] == mmin %}
+<h4 style="color: blue"> date: {{each['applicable_date']}}</h4>
+<h4 style="color: blue"> min temp: {{each['min_temp']}}</h4>
+<h4 style="color: blue"> max temp: {{each['max_temp']}}</h4>
+
+{% elif each['max_temp'] == mmax %}
+<h4 style="color: red"> date: {{each['applicable_date']}}</h4>
+<h4 style="color: red"> min temp: {{each['min_temp']}}</h4>
+<h4 style="color: red"> max temp: {{each['max_temp']}}</h4>
+
+{% else %}
+<h4> date: {{each['applicable_date']}}</h4>
+<h4> min temp: {{each['min_temp']}}</h4>
+<h4> max temp: {{each['max_temp']}}</h4>
+{% endif %}
+    <br>
+</li>
+{% endfor %}
+
+
+</ul>
+
+
+{% endblock %}
