@@ -4,7 +4,7 @@ What's the Weather Like?
 
 ## The project in short
 
-Simple Google App Engine Web Application written in Python 2.7, using MetaWheater site API (see references in "Built With" section).
+Simple Google App Engine Web Application example, written in Python 2.7, using MetaWheater site API (see references in "Built With" section).
 The user is able to see his favourite city weather forecasts for the next five days.
 
 ## Requirements
