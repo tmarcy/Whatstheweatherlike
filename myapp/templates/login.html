@@ -1,0 +1,34 @@
+{% extends "default.html"%}
+
+{% block title %}login{% endblock %}
+
+{% block content %}
+
+<h2>Login</h2>
+
+<form method="post" action="/login">
+    {{form.csrf_token}}
+    <div>{{form.email.label}}:{{form.email}}</div>
+    {% if form.email.errors %}
+    <ul class="error">
+        {% for e in form.email.errors %}
+        <li>{{e}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div>{{form.password.label}}:{{form.password}}</div>
+    {% if form.password.errors %}
+    <ul class="error">
+        {% for e in form.password.errors %}
+        <li>{{e}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div>{{form.submit}}</div>
+
+</form>
+
+{% endblock %}
+

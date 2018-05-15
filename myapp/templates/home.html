@@ -4,8 +4,18 @@
 
 {% block content %}
 
+<h1>Hello </h1>
+{% if session['user'] %}
+<h1>{{session['user']}}</h1>
+<ul>
+    <li><a href="/logout">Logout</a></li>
+</ul>
+{% else %}
+<a href="/login">Login</a>
 
-<h1>Hello! What's the weather like?</h1>
+{% endif %}
+
+<h1>What's the weather like?</h1>
 <h2>Choose one of the following links:</h2>
 
 {% if handlers %}

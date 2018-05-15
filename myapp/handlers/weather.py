@@ -1,8 +1,8 @@
 
-from flask import render_template, request, make_response
+from flask import render_template, request, session, redirect
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import required
+from wtforms import StringField, SubmitField, PasswordField
+from wtforms.validators import required, Email, length
 
 import logging
 from myapp import app
@@ -13,9 +13,37 @@ import json
 import urllib, urllib2
 
 
+class LoginForm(FlaskForm):
+    email = StringField('email', [required(), Email()])
+    password = PasswordField('password', [required(), length(min=8, max=35)])
+    submit = SubmitField('submit', [required()])
+
+
 class MyForm(FlaskForm):
     city = StringField('city', [required()])
     submit = SubmitField('search', [required()])
+
+
+@app.route('/login', methods=['GET'])
+def show_loginForm():
+    form = LoginForm()
+    return render_template('login.html', form=form)
+
+
+@app.route('/login', methods=['POST'])
+def submit_loginForm():
+    form = LoginForm(request.form)
+    if not form.validate():
+        return render_template('login.html', form=form), 400
+
+    session['user'] = form.email.data
+    return redirect('/')
+
+
+@app.route('/logout', methods=['POST', 'GET'])
+def logout():
+    del session['user']
+    return redirect('/')
 
 
 @app.route('/search', methods=['GET'])
