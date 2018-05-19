@@ -3,12 +3,9 @@ from flask import render_template, request, session, redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import required, Email, length
-
-import logging
 from myapp import app
-
 from myapp.models.City import City
-
+import logging
 import json
 import urllib, urllib2
 
@@ -61,9 +58,7 @@ def submitForm():
     city_inserted = form.city.data
 
     # save data in the Datastore
-
     qry = City.query(City.name == city_inserted).get()
-
     if not qry:
         new_c = City(name=city_inserted, counter=1)
         new_c.put()
@@ -73,14 +68,10 @@ def submitForm():
         qry.put()
         logging.info('Correctly update {}'.format(city_inserted))
 
-    # use metaweather.com API
-
+    # use Metaweather API
     url = 'https://www.metaweather.com/api/location/search/'
-
     params = urllib.urlencode({'query': city_inserted})
-
     myurl = '{}?{}'.format(url, params)
-
     logging.info('myurl: {}'.format(myurl))
 
     req = urllib2.Request(myurl)
@@ -90,11 +81,8 @@ def submitForm():
     woeid = str(risp[0]['woeid'])
 
     url2 = 'https://www.metaweather.com/api/location/'
-
     myurl2 = '{}{}/'.format(url2, woeid)
-
     logging.info('myurl: {}'.format(myurl2))
-
     req2 = urllib2.Request(myurl2)
     urlopen2 = urllib2.urlopen(req2)
     content2 = urlopen2.read()
@@ -109,10 +97,5 @@ def submitForm():
 
     mmin = min(tmin)
     mmax = max(tmax)
-    print mmin
-    print mmax
 
     return render_template('response.html', resp=resp, tmin=tmin, tmax=tmax, mmin=mmin, mmax=mmax)
-
-
-
